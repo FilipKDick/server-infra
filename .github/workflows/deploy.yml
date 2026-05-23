@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose config
+        run: |
+          cp .env.example .env
+          docker compose -f compose.yml config
+
+      - name: Validate Caddyfile
+        run: |
+          docker run --rm \
+            -v "$PWD/Caddyfile:/etc/caddy/Caddyfile:ro" \
+            -e DOMAIN=example.com \
+            caddy:2-alpine \
+            caddy validate --config /etc/caddy/Caddyfile
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            cd ~/apps/server-infra
+            git pull
+            docker network inspect caddy-shared >/dev/null 2>&1 || docker network create caddy-shared
+            docker compose up -d
