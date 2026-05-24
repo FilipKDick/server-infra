@@ -33,8 +33,9 @@ services:
       retries: 10
 
   umami:
-    image: ghcr.io/umami-software/umami:postgresql-latest
+    image: ghcr.io/umami-software/umami:latest
     container_name: server_infra_umami
+    init: true
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql://${UMAMI_POSTGRES_USER}:${UMAMI_POSTGRES_PASSWORD}@umami_postgres:5432/${UMAMI_POSTGRES_DB}
@@ -45,6 +46,11 @@ services:
     networks:
       - caddy-shared
       - default
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:3000/api/heartbeat"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   beszel:
     image: henrygd/beszel:latest
