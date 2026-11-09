@@ -73,3 +73,4 @@ For the local system host, use the Unix socket path:
 - `https://analytics.$DOMAIN` -> Umami
 - `https://mcp.$DOMAIN` -> Dixa MCP
 - `https://monitoring.$DOMAIN` -> Beszel
+- `https://$DOMAIN/shelf/` -> Shelf Reader static page (`~/apps/shelf-reader`, container `shelf_reader`)
