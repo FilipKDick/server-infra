@@ -71,6 +71,5 @@ For the local system host, use the Unix socket path:
 
 - `https://$DOMAIN` -> IHYS frontend/backend
 - `https://analytics.$DOMAIN` -> Umami
-- `https://mcp.$DOMAIN` -> Dixa MCP
 - `https://monitoring.$DOMAIN` -> Beszel
-- `https://$DOMAIN/shelf/` -> Shelf Reader static page (`~/apps/shelf-reader`, container `shelf_reader`)
+- `https://when.filipdidit.com` -> Scheduler (`FilipKDick/scheduler`, container `scheduler`)

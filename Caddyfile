@@ -3,20 +3,12 @@ www.{$DOMAIN} {
 }
 
 {$DOMAIN} {
-	redir /shelf /shelf/
-	handle_path /shelf/* {
-		reverse_proxy shelf_reader:80
-	}
 	reverse_proxy /api/* ihys_backend:8000
 	reverse_proxy * ihys_frontend:3000
 }
 
 analytics.{$DOMAIN} {
 	reverse_proxy server_infra_umami:3000
-}
-
-mcp.{$DOMAIN} {
-	reverse_proxy mcp-server:8000
 }
 
 monitoring.{$DOMAIN} {
