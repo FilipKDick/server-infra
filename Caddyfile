@@ -22,3 +22,7 @@ mcp.{$DOMAIN} {
 monitoring.{$DOMAIN} {
 	reverse_proxy server_infra_beszel:8090
 }
+
+when.filipdidit.com {
+	reverse_proxy scheduler:8000
+}
