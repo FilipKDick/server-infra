@@ -39,3 +39,6 @@ jobs:
             git pull
             docker network inspect caddy-shared >/dev/null 2>&1 || docker network create caddy-shared
             docker compose up -d
+            # The Caddyfile is a single-file bind mount: git pull replaces the file (new inode),
+            # so the running container keeps the old one until it restarts.
+            docker compose restart caddy
