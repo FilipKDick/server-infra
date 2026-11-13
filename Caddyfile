@@ -18,3 +18,7 @@ monitoring.{$DOMAIN} {
 when.filipdidit.com {
 	reverse_proxy scheduler:8000
 }
+
+mover.filipdidit.com {
+	reverse_proxy mover:3000
+}
