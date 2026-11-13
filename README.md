@@ -73,3 +73,4 @@ For the local system host, use the Unix socket path:
 - `https://analytics.$DOMAIN` -> Umami
 - `https://monitoring.$DOMAIN` -> Beszel
 - `https://when.filipdidit.com` -> Scheduler (`FilipKDick/scheduler`, container `scheduler`)
+- `https://mover.filipdidit.com` -> Mover (`~/apps/mover`, container `mover`)
